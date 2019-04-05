@@ -109,14 +109,11 @@ export class InventoryService {
         results.push(this.rawData[x]);
       }
     }
-
-    console.log(results);
     return results;
   }
 
   private addEntryToData(passedType: number, passedCategory: number, passedValue: string): number {
     // TODO replace with call to add this to db and return with id
-    console.log(this.rawData[this.rawData.length-1]);
     let id: number = this.rawData[this.rawData.length-1].id + 1;
 
     this.rawData.push({
@@ -125,8 +122,6 @@ export class InventoryService {
       categoryId: passedCategory,
       typeId: passedType
     });
-
-    console.log(this.rawData);
 
     return id;
   }

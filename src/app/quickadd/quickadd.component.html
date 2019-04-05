@@ -38,4 +38,6 @@
     <div *ngIf="quickAddForm.controls.selectedStatus.invalid && quickAddForm.controls.selectedStatus.touched">Please select an item status</div>
   </div>
   <button type="submit" [disabled]="!quickAddForm.valid">Add Item</button>
+  <button type="button" (click)="reset()">Reset</button>
+  <button type="button" (click)="back()">Back</button>
 </form>
