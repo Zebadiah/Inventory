@@ -1,0 +1,30 @@
+<h2>Inventory Listing</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Details</th>
+      <th>Format</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items">
+      <td>{{ item.itemType }}</td>
+      <td>
+        <a routerLink="/view/{{ item.id }}">
+          {{ item.name }}
+        </a>
+
+        <div *ngIf="item.hasOwnProperty('persons')">
+          <span *ngFor="let person of item.persons">{{ person }}{{ $last ? '' : ', '</span>
+        </div>
+      </td>
+      <td>{{ item.format }}</td>
+      <td>{{ item.status }}</td>
+    </tr>
+  </tbody>
+</table>
+
+{{ items }}

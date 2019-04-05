@@ -1,0 +1,44 @@
+<div *ngIf="item">
+  <h2>{{ item.itemType }} Details</h2>
+  <div>
+    <span>Name: </span>{{ item.name }}
+  </div>
+  <div *ngIf="item.series">
+    <span>Series: </span>{{ item.series }}
+    <span *ngIf="item.numberInSeries"> #{{ item.numberInSeries }}</span>
+    <span *ngIf="item.seriesLength"> of {{ item.seriesLength }}</span>
+  </div>
+  <div *ngIf="item.persons">
+    <span *ngIf="item.itemType === 'Book'">Author(s): </span>
+    <span *ngIf="item.itemType === 'Roleplaying Game'">Author(s): </span>
+    <span *ngIf="item.itemType === 'Movie'">Actors(s): </span>
+    <span *ngIf="item.itemType === 'Video Game'">Developer(s): </span>
+    <span *ngFor="let person of item.persons">{{ person }}{{ $last ? '' : ', ' }}</span>
+  </div>
+  <div *ngIf="item.publishers">
+    <span>Publisher(s): </span>
+    <span *ngFor="let publisher of item.publishers">{{ publisher }}{{ $last ? '' : ', ' }}</span>
+  </div>
+  <div>
+    <span>Format: </span>{{ item.format }}
+  </div>
+  <div *ngIf="item.setting">
+    <span>Setting: </span>{{ item.setting }}
+  </div>
+  <div *ngIf="item.genres">
+    <span>Genre(s): </span>
+    <span *ngFor="let genre of item.genres">{{ genre }}{{ $last ? '' : ', ' }}</span>
+  </div>
+  <div *ngIf="item.ruleset">
+    <span>Ruleset: </span>{{ item.ruleset }}
+  </div>
+  <div *ngIf="item.status">
+    <span>Status: </span>{{ item.status }}
+  </div>
+</div>
+<div>
+  <button routerLink="/edit/{{ item.id }}">Edit Item</button>
+</div>
+<div>
+  <button (click)="back()">Back</button>
+</div>

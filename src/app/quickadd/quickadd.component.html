@@ -1,0 +1,41 @@
+<h2>Quick Add</h2>
+<form [formGroup]="quickAddForm" (ngSubmit)="addItem()">
+  <div>
+    <label>
+      Type: 
+      <select formControlName="selectedType" (change)="changeType()" required autofocus >
+        <option value="" default selected="selected">Select Type</option>
+        <option *ngFor="let type of availableTypes" value="{{ type.id }}">{{ type.name }}</option>
+      </select>
+    </label>
+    <div *ngIf="quickAddForm.controls.selectedType.invalid && quickAddForm.controls.selectedType.touched">Please select an item type</div>
+  </div>
+  <div>
+    <label>
+      Title: 
+      <input formControlName="selectedTitle" type="text" placeholder="Enter Title" onfocus="this.select()" required />
+    </label>
+    <div *ngIf="quickAddForm.controls.selectedTitle.invalid && quickAddForm.controls.selectedTitle.touched">Please enter the item's title</div>
+  </div>
+  <div>
+    <label>
+      Format:
+      <input formControlName="selectedFormat" type="text" placeholder="Enter Format" list="format-list"  onfocus="this.select()" required />
+      <datalist id="format-list" *ngIf="availableFormats.length > 0">
+        <option *ngFor="let format of availableFormats" value="{{ format.name }}"></option>
+      </datalist>
+    </label>
+    <div *ngIf="quickAddForm.controls.selectedFormat.invalid && quickAddForm.controls.selectedFormat.touched">Please select an item format or enter a new format</div>
+  </div>
+  <div>
+    <label>
+      Status
+      <select formControlName="selectedStatus" required>
+        <option value="" selected>Select Status</option>
+        <option *ngFor="let status of availableStatuses" value="{{ status.id }}">{{ status.name }}</option>
+      </select>
+    </label>
+    <div *ngIf="quickAddForm.controls.selectedStatus.invalid && quickAddForm.controls.selectedStatus.touched">Please select an item status</div>
+  </div>
+  <button type="submit" [disabled]="!quickAddForm.valid">Add Item</button>
+</form>

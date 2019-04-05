@@ -1,0 +1,122 @@
+<h2>Add Item to Inventory</h2>
+<form [formGroup]="addForm" (ngSubmit)="addItem()">
+  <div>
+    <label>
+      Type: 
+      <select formControlName="selectedType" (change)="changeType()" required>
+        <option value="" default selected="selected">Select Type</option>
+        <option *ngFor="let type of availableTypes" value="{{ type.id }}">{{ type.name }}</option>
+      </select>
+    </label>
+    <div *ngIf="addForm.controls.selectedType.invalid && addForm.controls.selectedType.touched">Please select an item
+      type</div>
+  </div>
+  <div *ngIf="addForm.controls.selectedType.value !== ''">
+  <div>
+    <label>
+      Title:
+      <input formControlName="selectedTitle" type="text" placeholder="Enter Title" onfocus="this.select()" required />
+    </label>
+    <div *ngIf="addForm.controls.selectedTitle.invalid && addForm.controls.selectedTitle.touched">Please enter the
+      item's title</div>
+  </div>
+  <div>
+    <label>
+      Series: 
+      <input formControlName="selectedSeries" type="text" placeholder="Enter Series Name" list="series-list"
+        onfocus="this.select()" />
+      <datalist id="series-list" *ngIf="availableSerieses.length > 0">
+        <option *ngFor="let series  of availableSerieses" value="{{ series.name }}"></option>
+      </datalist>
+    </label>
+  </div>
+  <div *ngIf="addForm.controls.selectedSeries.value.length > 0">
+    <label>
+      Number in Series:
+      <input formControlName="selectedNumberInSeries" type="number" placeholder="# in Series" onfocus="this.select()" />
+    </label>
+    <label>
+      Series Length:
+      <input formControlName="selectedSeriesLength" type="number" placeholder="Series Length" onfocus="this.select()" />
+    </label>
+  </div>
+  <div>
+    <label>
+      <span *ngIf="addForm.controls.selectedType.value === '1'">Author(s):</span>
+      <span *ngIf="addForm.controls.selectedType.value === '2'">Author(s):</span>
+      <span *ngIf="addForm.controls.selectedType.value === '3'">Actor(s):</span>
+      <span *ngIf="addForm.controls.selectedType.value === '4'">Developer(s):</span>
+      <input formControlName="selectedPerson" type="text" placeholder="Enter Name" list="person-list"
+        onfocus="this.select()" />
+      <datalist id="person-list" *ngIf="availablePersons.length > 0">
+        <option *ngFor="let person of availablePersons" value="{{ person.name }}"></option>
+      </datalist>
+    </label>
+  </div>
+  <div>
+    <label>
+      Publisher(s):
+      <input formControlName="selectedPublisher" type="text" placeholder="Enter Name" list="publisher-list"
+        onfocus="this.select()" />
+      <datalist id="publisher-list" *ngIf="availablePublishers.length > 0">
+        <option *ngFor="let publisher of availablePublishers" value="{{ publisher.name }}"></option>
+      </datalist>
+    </label>
+  </div>
+  <div>
+    <label>
+      Format:
+      <input formControlName="selectedFormat" type="text" placeholder="Enter Format" list="format-list"
+        onfocus="this.select()" required />
+      <datalist id="format-list" *ngIf="availableFormats.length > 0">
+        <option *ngFor="let format of availableFormats" value="{{ format.name }}"></option>
+      </datalist>
+    </label>
+    <div *ngIf="addForm.controls.selectedFormat.invalid && addForm.controls.selectedFormat.touched">Please select an
+      item format or enter a new format</div>
+  </div>
+  <div>
+    <label>
+      Setting:
+      <input formControlName="selectedSetting" type="text" placeholder="Enter Name" list="setting-list"
+        onfocus="this.select()" />
+      <datalist id="setting-list" *ngIf="availableSettings.length > 0">
+        <option *ngFor="let setting of availableSettings" value="{{ setting.name }}"></option>
+      </datalist>
+    </label>
+  </div>
+  <div>
+    <label>
+      Genre(s):
+      <input formControlName="selectedGenre" type="text" placeholder="Enter Genre" list="genre-list"
+        onfocus="this.select()" />
+      <datalist id="genre-list" *ngIf="availableGenres.length > 0">
+        <option *ngFor="let genre of availableGenres" value="{{ genre.name }}"></option>
+      </datalist>
+    </label>
+  </div>
+  <div>
+    <label>
+      Ruleset:
+      <input formControlName="selectedRuleset" type="text" placeholder="Enter Ruleset" list="ruleset-list"
+        onfocus="this.select()" />
+      <datalist id="ruleset-list" *ngIf="availableRulesets.length > 0">
+        <option *ngFor="let ruleset of availableRulesets" value="{{ ruleset.name }}"></option>
+      </datalist>
+    </label>
+  </div>
+  <div>
+    <label>
+      Status
+      <select formControlName="selectedStatus" required>
+        <option value="" selected>Select Status</option>
+        <option *ngFor="let status of availableStatuses" value="{{ status.id }}">{{ status.name }}</option>
+      </select>
+    </label>
+    <div *ngIf="addForm.controls.selectedStatus.invalid && addForm.controls.selectedStatus.touched">Please select an
+      item status</div>
+  </div>
+  <button type="submit" [disabled]="!addForm.valid">Add Item</button>
+  <button type="button" (click)="reset()">Reset</button>
+</div>
+</form>
